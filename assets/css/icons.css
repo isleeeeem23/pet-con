@@ -1,0 +1,178 @@
+/* ============================================================
+   PetConnect — icons.css
+   Custom Pet-Themed SVG Icon System
+   Animations: pulsePaw, birdFlap, boneSpin, bellJingle
+   ============================================================ */
+
+/* ── CSS Variables ────────────────────────────────────────── */
+:root {
+    --icon-color:        #4a6b4a;
+    --icon-muted:        #7a9a7a;
+    --icon-active-like:  #FF6B6B;
+    --icon-active-msg:   #10b981;
+    --icon-hover-bg:     rgba(16, 185, 129, 0.10);
+    --icon-size:         26px;
+    --icon-size-nav:     22px;
+}
+[data-theme="dark"] {
+    --icon-color:   #9ab89a;
+    --icon-muted:   #6a8a6a;
+    --icon-hover-bg: rgba(16, 185, 129, 0.14);
+}
+
+/* ── Base SVG icon wrapper ────────────────────────────────── */
+.pet-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+.pet-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    overflow: visible;
+}
+.pet-icon--nav {
+    width: var(--icon-size-nav);
+    height: var(--icon-size-nav);
+}
+.pet-icon--xs { width: 14px; height: 14px; }
+.pet-icon--sm { width: 18px; height: 18px; }
+.pet-icon--md { width: 24px; height: 24px; }
+.pet-icon--lg { width: 42px; height: 42px; }
+.pet-icon--xl { width: 64px; height: 64px; }
+
+/* ═══════════════════════════════════════════════════════════
+   1. PAW PRINT (Like button)
+   ═══════════════════════════════════════════════════════════ */
+.icon-paw .paw-pad,
+.icon-paw .paw-toe { fill: var(--icon-color); transition: fill 0.25s ease; }
+
+/* Active / liked state */
+.icon-paw.is-liked .paw-pad,
+.icon-paw.is-liked .paw-toe {
+    fill: var(--icon-active-like);
+    animation: pulsePaw 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes pulsePaw {
+    0%   { transform: scale(1); }
+    20%  { transform: scale(1.35); }
+    40%  { transform: scale(0.88); }
+    60%  { transform: scale(1.18); }
+    80%  { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2. WHISKERED SPEECH BUBBLE (Comment button)
+   ═══════════════════════════════════════════════════════════ */
+.icon-bubble .bubble-body    { fill: transparent; stroke: var(--icon-color); stroke-width: 2; transition: stroke 0.2s; }
+.icon-bubble .bubble-whisker { stroke: var(--icon-color); stroke-width: 1.5; stroke-linecap: round; transition: stroke 0.2s; }
+.icon-bubble .bubble-dot     { fill: var(--icon-color); transition: fill 0.2s; }
+
+.btn-action:hover .icon-bubble .bubble-body    { stroke: var(--primary); }
+.btn-action:hover .icon-bubble .bubble-whisker  { stroke: var(--primary); }
+.btn-action:hover .icon-bubble .bubble-dot     { fill: var(--primary); }
+
+/* ═══════════════════════════════════════════════════════════
+   3. BIRD IN FLIGHT (Share / Contact owner)
+   ═══════════════════════════════════════════════════════════ */
+.icon-bird .bird-body { fill: var(--icon-color); transition: fill 0.2s; }
+.icon-bird .bird-wing { fill: var(--icon-color); transform-origin: 40% 55%; transition: fill 0.2s; }
+
+.btn-action:hover .icon-bird .bird-body,
+.btn-action:hover .icon-bird .bird-wing { fill: var(--primary); }
+
+.icon-bird.is-flying .bird-wing { animation: birdFlap 0.55s ease forwards; }
+.icon-bird.is-flying { animation: birdSoar 0.55s ease forwards; }
+
+@keyframes birdFlap {
+    0%   { transform: scaleY(1); }
+    25%  { transform: scaleY(-0.6) translateY(-2px); }
+    50%  { transform: scaleY(0.8) translateY(1px); }
+    75%  { transform: scaleY(-0.4) translateY(-1px); }
+    100% { transform: scaleY(1); }
+}
+@keyframes birdSoar {
+    0%   { transform: translateY(0); }
+    40%  { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   4. BONE (Messages — nav link)
+   ═══════════════════════════════════════════════════════════ */
+.icon-bone .bone-body { fill: var(--icon-color); transition: fill 0.25s ease; }
+
+.nav-link:hover .icon-bone .bone-body,
+.icon-bone.has-new .bone-body { fill: var(--primary); }
+
+.icon-bone.has-new { animation: boneSpin 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+.nav-link:hover .icon-bone { animation: boneSpin 0.5s ease; }
+
+@keyframes boneSpin {
+    0%   { transform: rotate(0deg); }
+    35%  { transform: rotate(180deg) scale(1.15); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5. CAT-EARED BELL (Notifications)
+   ═══════════════════════════════════════════════════════════ */
+.icon-catbell .bell-body,
+.icon-catbell .bell-ear   { fill: var(--icon-color); transition: fill 0.25s ease; }
+.icon-catbell .bell-clapper { fill: var(--icon-color); }
+.icon-catbell .bell-dot   { fill: transparent; stroke: var(--bg-card); stroke-width: 1.5; }
+
+.icon-catbell.has-notif .bell-body,
+.icon-catbell.has-notif .bell-ear {
+    fill: var(--icon-active-like);
+    animation: bellJingle 0.6s ease;
+}
+.nav-link:hover .icon-catbell .bell-body,
+.nav-link:hover .icon-catbell .bell-ear { fill: var(--primary); }
+
+@keyframes bellJingle {
+    0%, 100% { transform: rotate(0deg); transform-origin: center top; }
+    15%  { transform: rotate(-18deg); transform-origin: center top; }
+    35%  { transform: rotate(18deg);  transform-origin: center top; }
+    55%  { transform: rotate(-10deg); transform-origin: center top; }
+    75%  { transform: rotate(8deg);   transform-origin: center top; }
+    90%  { transform: rotate(-4deg);  transform-origin: center top; }
+}
+
+/* ── Action Button Base ───────────────────────────────────── */
+.btn-action {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.22s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    gap: 0;
+}
+.btn-action:hover {
+    background: var(--icon-hover-bg);
+    transform: scale(1.12);
+}
+.btn-action:active { transform: scale(0.93); }
+
+/* Like count pop-in */
+.likes-count.count-bump {
+    animation: countBump 0.4s ease;
+    display: inline-block;
+}
+@keyframes countBump {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.5); color: var(--icon-active-like); }
+    100% { transform: scale(1); }
+}

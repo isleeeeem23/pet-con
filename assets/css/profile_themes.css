@@ -1,0 +1,102 @@
+/* assets/css/profile_themes.css — Dynamic Styling for User Profiles */
+
+.profile-page {
+    --p-primary: var(--profile-primary, var(--primary));
+    --p-secondary: var(--profile-secondary, var(--secondary));
+    --p-bg: var(--profile-bg, var(--bg-card));
+    --p-text: var(--profile-text, var(--text-main));
+    --p-contrast: var(--profile-contrast, #ffffff);
+}
+
+.profile-card {
+    background: var(--p-bg);
+    border: 1px solid rgba(var(--p-primary-rgb, 76, 175, 80), 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-cover {
+    height: 160px;
+    background: linear-gradient(135deg, var(--p-primary), var(--p-secondary));
+    position: relative;
+}
+
+.profile-cover::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, var(--p-bg), transparent);
+}
+
+.profile-avatar-wrapper .avatar {
+    border: 4px solid var(--p-bg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: var(--p-bg);
+}
+
+.profile-name {
+    color: var(--p-text);
+}
+
+.profile-bio {
+    color: var(--p-text);
+    opacity: 0.9;
+}
+
+.stat strong {
+    color: var(--p-primary);
+}
+
+.stat span {
+    color: var(--p-text);
+    opacity: 0.7;
+}
+
+/* Themed Action Buttons */
+.profile-actions .btn-primary {
+    background: var(--p-primary);
+    color: var(--p-contrast);
+    border: none;
+    box-shadow: 0 4px 10px rgba(var(--p-primary-rgb, 76, 175, 80), 0.3);
+}
+
+.profile-actions .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.profile-actions .btn-outline {
+    border-color: var(--p-primary);
+    color: var(--p-primary);
+}
+
+.profile-actions .btn-outline:hover {
+    background: var(--p-primary);
+    color: var(--p-contrast);
+}
+
+/* Grid Post Overlays */
+.grid-post-overlay {
+    background: linear-gradient(to top, rgba(var(--p-primary-rgb, 76, 175, 80), 0.8), transparent);
+}
+
+.section-title {
+    color: var(--p-text);
+    border-bottom: 2px solid var(--p-secondary);
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+/* Dark Mode Overrides for Dynamic Themes */
+[data-theme="dark"] .profile-page {
+    --p-bg: #1a1a1a; /* Keep dark background even if palette says light */
+    --p-text: #e0e0e0;
+}
+
+[data-theme="dark"] .profile-card {
+    border-color: rgba(var(--p-primary-rgb, 76, 175, 80), 0.2);
+}
